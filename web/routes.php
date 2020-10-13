@@ -5,13 +5,12 @@ function routes($get)
 
     $file_request = end($req);
 
-    $_SESSION['username'] = "arwan";
-    $_SESSION['akses'] = "perlengkapan";
-    // session_destroy();
-    // Default path
+    // Default path page  ======> lokasi : page/
     $path = PAGES;
+    //  Default aksi
+    $aksi = "login";
+    // Nama file page not found   ===> lokasi : pages/nama_file.php
     $NotFound = PAGES . '404.php';
-    $aksi = "login";    //  Default aksi
 
     // Ambil Route
     $route = (isset($get['page'])) ? $get['page'] : "/";
