@@ -63,6 +63,10 @@ function login($data)
         unset($_SESSION['level']);
         header("location:index.php");
     }
+
+    $_SESSION['username'] = "arwan";
+    $_SESSION['akses'] = "perlengkapan";
+    // session_destroy();
 }
 
 ?>
