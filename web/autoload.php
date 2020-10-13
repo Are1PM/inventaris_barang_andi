@@ -11,5 +11,7 @@ foreach (glob('web/config/*.php') as $filename) {
     include_once $filename;
 }
 
+foreach (glob('web/proses/*.php') as $filename) {
+    include_once $filename;
+}
 include_once "routes.php";
-include_once "proses.php";
