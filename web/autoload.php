@@ -12,3 +12,4 @@ foreach (glob('web/config/*.php') as $filename) {
 }
 
 include_once "routes.php";
+include_once "proses.php";
