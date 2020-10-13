@@ -9,7 +9,7 @@
         <div class="clearfix"></div>
 
         <div class="row">
-
+            <?php include routes($_GET); ?>
         </div>
     </div>
 </div>
