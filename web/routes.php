@@ -1,50 +1,67 @@
 <?php
 function routes($get)
 {
-    $result = PAGES . "/";
-    $page = (isset($get['page'])) ? $get['page'] : "/";
+    $req = explode("/", $_SERVER['REQUEST_URI']);
 
-    switch ($page) {
-        case 'beranda':
-            $result .= 'beranda.php';
-            break;
-        case 'lihat-data-user-prodi':
-            $result .= "lihat-data-user-prodi.php";
-            break;
-        case 'form-input-data-user-prodi':
-            $result .= "form-input-data-user-prodi.php";
-            break;
-        case 'input-data-user-prodi':
-            $result .= "input-data-user-prodi.php";
-            break;
-        case 'edit-data-user-prodi':
-            $result .= "edit-data-user-prodi.php";
-            break;
-        case 'delete-data-user-prodi':
-            $result .= "delete-data-user-prodi.php";
-            break;
-        case 'delete-data-stok-barang':
-            $result .= "delete-stok-barang.php";
-            break;
-        case 'edit-data-stok-barang':
-            $result .= "edit-stok-barang.php";
-            break;
-        case 'form-input-stok-barang':
-            $result .= "form-input-stok-barang.php";
-            break;
-        case 'input-data-stok-barang':
-            $result .= "input-stok-barang.php";
-            break;
-        case 'lihat-data-stok-barang':
-            $result .= "lihat-stok-barang.php";
-            break;
+    $file_request = end($req);
+
+    $_SESSION['username'] = "arwan";
+    $_SESSION['akses'] = "perlengkapan";
+    // session_destroy();
+    // Default path
+    $path = PAGES;
+    $NotFound = PAGES . '404.php';
+    $aksi = "login";    //  Default aksi
+
+    // Ambil Route
+    $route = (isset($get['page'])) ? $get['page'] : "/";
+
+    // =============================================================
+    //  === Set User Path ==========================================
+    // =============================================================
+
+    if (isset($_SESSION['username']) && isset($_SESSION['akses'])) {
+        $file = $_SESSION['akses'] . "/" . $route;
+
+        // Agar tidak not found saat file index.php tanpa parameter
+        if ($route === "") {
+            $file .= "beranda.php";
+
+            // Agar tidak not found saat file index.php tanpa parameter
+        } elseif (in_array($file_request, ["index.php", ""])) {
+            $file .= "beranda.php";
+
+            // Menamai file sesuai route
+        } else {
+            $file .= ".php";
+        }
+
+        $path .= $file;
+
+        if (file_exists($path)) {
+            return $path;
+        } else {
+            $aksi = "";
+        }
+    }
+
+    // =============================================================
+    //  === Jika Tidak Login =======================================
+    // =============================================================
+    switch ($aksi) {
         case 'export-stok-pdf':
             echo "<script language=\"JavaScript\">
-                                        document.location='export.php?file=stok-pdf';
-                                        </script>";
+                    document.location='export.php?file=stok-pdf';
+                    </script>";
+            break;
+        case 'login':
+            $path .= 'login.php';
             break;
         default:
-            $result .= 'default.php';
+            return $NotFound;
+            break;
     }
-    return $result;
+
+
+    return $path;
 }
