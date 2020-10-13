@@ -23,7 +23,17 @@
 
         <!-- sidebar menu -->
         <!-- left navigation -->
-        <?php include_once LAYOUT . "/menu/left.php" ?>
+        <?php
+        if (isset($_SESSION['username']) && isset($_SESSION['akses'])) {
+            if ($_SESSION['akses'] == "perlengkapan") {
+                include_once LAYOUT . "/menu/left-perlengkapan.php";
+            } elseif ($_SESSION['akses'] == "pegawai") {
+                include_once LAYOUT . "/menu/left-pegawai.php";
+            } else {
+                include_once LAYOUT . "/menu/left-prodi.php";
+            }
+        }
+        ?>
         <!-- /left navigation -->
         <!-- /sidebar menu -->
 
