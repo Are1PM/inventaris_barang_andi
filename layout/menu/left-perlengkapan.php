@@ -30,7 +30,7 @@
             <li><a href="index.php?page=lihat-user-prodi"><i class="fa fa-laptop"></i> Prodi </a>
 
             </li>
-            <li><a><i class="fa fa-sitemap"></i> Pegawai </a>
+            <li><a href="index.php?page=lihat-pegawai"><i class="fa fa-sitemap"></i> Pegawai </a>
 
             </li>
         </ul>
