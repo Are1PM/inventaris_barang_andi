@@ -40,7 +40,11 @@ function hapusBarang()
 
 function lihatProdi()
 {
-    return "lihat Prodi";
+    global $Open;
+    $sql = "SELECT * FROM prodi";
+    $query = mysqli_query($Open, $sql);
+
+    return $query;
 }
 
 function cariProdi()
