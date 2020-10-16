@@ -1,5 +1,5 @@
 <?php
-$data = mysqli_fetch_all(lihatProdi(), MYSQLI_ASSOC);
+$data = mysqli_fetch_all(lihatPegawai(), MYSQLI_ASSOC);
 $no = 1;
 ?>
 <div class="col-md-12 col-sm-12 ">
@@ -18,8 +18,10 @@ $no = 1;
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Prodi</th>
-                                    <th>Aksi</th>
+                                    <th>NIP/NIDN</th>
+                                    <th>Nama Pegawai</th>
+                                    <th>Jabatan</th>
+                                    <th width="27%">Aksi</th>
                                 </tr>
                             </thead>
 
@@ -28,8 +30,19 @@ $no = 1;
                                 <?php foreach ($data as $k => $d) { ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
-                                        <td><?= $d['nama_prodi'] ?></td>
-                                        <td>Aksi</td>
+                                        <td><?= $d['nip_nid'] ?></td>
+                                        <td><?= $d['nama_pegawai'] ?></td>
+                                        <td><?= $d['jabatan'] ?></td>
+                                        <td>
+                                            <a class="btn btn-warning btn-sm mr-1">
+                                                <i class="fa fa-eye"></i> Detail
+                                            </a>
+                                            <a class="btn btn-primary btn-sm mr-1">
+                                                <i class="fa fa-edit"></i> Ubah
+                                            </a>
+                                            <a class="btn btn-danger btn-sm">
+                                                <i class="fa fa-trash"></i> Hapus
+                                            </a></td>
                                     </tr>
                                 <?php } ?>
                             </tbody>

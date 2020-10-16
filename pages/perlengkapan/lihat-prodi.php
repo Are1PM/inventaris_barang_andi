@@ -19,7 +19,7 @@ $no = 1;
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Prodi</th>
-                                    <th>Aksi</th>
+                                    <th width="27%">Aksi</th>
                                 </tr>
                             </thead>
 
@@ -29,7 +29,16 @@ $no = 1;
                                     <tr>
                                         <td><?= $no++ ?></td>
                                         <td><?= $d['nama_prodi'] ?></td>
-                                        <td>Aksi</td>
+                                        <td>
+                                            <a class="btn btn-warning btn-sm mr-1">
+                                                <i class="fa fa-eye"></i> Detail
+                                            </a>
+                                            <a class="btn btn-primary btn-sm mr-1">
+                                                <i class="fa fa-edit"></i> Ubah
+                                            </a>
+                                            <a class="btn btn-danger btn-sm">
+                                                <i class="fa fa-trash"></i> Hapus
+                                            </a></td>
                                     </tr>
                                 <?php } ?>
                             </tbody>

@@ -1,5 +1,5 @@
 <?php
-$data = mysqli_fetch_all(lihatBarang(), MYSQLI_ASSOC);
+$data = lihatBarang();
 $no = 1;
 ?>
 <div class="col-md-12 col-sm-12 ">
@@ -22,7 +22,7 @@ $no = 1;
                                     <th>Nama Barang</th>
                                     <th>No. Inventaris</th>
                                     <th>Jenis Barang</th>
-                                    <th>Aksi</th>
+                                    <th width="27%">Aksi</th>
                                 </tr>
                             </thead>
 
@@ -35,7 +35,17 @@ $no = 1;
                                         <td><?= $d['nama_brg'] ?></td>
                                         <td><?= $d['no_inventaris'] ?></td>
                                         <td><?= $d['jenis_brg'] ?></td>
-                                        <td>Aksi</td>
+                                        <td>
+                                            <a class="btn btn-warning btn-sm mr-1">
+                                                <i class="fa fa-eye"></i> Detail
+                                            </a>
+                                            <a class="btn btn-primary btn-sm mr-1">
+                                                <i class="fa fa-edit"></i> Ubah
+                                            </a>
+                                            <a class="btn btn-danger btn-sm">
+                                                <i class="fa fa-trash"></i> Hapus
+                                            </a>
+                                        </td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
