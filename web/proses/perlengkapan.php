@@ -9,8 +9,9 @@ function lihatBarang()
     global $Open;
     $sql = "SELECT * FROM barang";
     $query = mysqli_query($Open, $sql);
+    $hasil = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
-    return $query;
+    return $hasil;
 }
 
 function cariBarang()
@@ -31,6 +32,21 @@ function ubahBarang()
 function hapusBarang()
 {
     return "hapus barang";
+}
+
+function grafikBarang()
+{
+    global $Open;
+    $q = "SELECT nama_brg, jumlah_masuk FROM `barang`";
+    $ambil = mysqli_query($Open, $q);
+    $hasil = mysqli_fetch_all($ambil);
+
+    foreach ($hasil as $val) {
+        $brg[] = $val[0];
+        $jumlah[] = $val[1];
+    }
+
+    return [$brg, $jumlah];
 }
 
 
@@ -74,7 +90,11 @@ function hapusProdi()
 
 function lihatKategori()
 {
-    return "lihat Kategori";
+    global $Open;
+    $sql = "SELECT * FROM kategori";
+    $query = mysqli_query($Open, $sql);
+
+    return $query;
 }
 
 function cariKategori()
@@ -104,7 +124,11 @@ function hapusKategori()
 
 function lihatRuangan()
 {
-    return "lihat Ruangan";
+    global $Open;
+    $sql = "SELECT * FROM ruangan";
+    $query = mysqli_query($Open, $sql);
+
+    return $query;
 }
 
 function cariRuangan()
@@ -134,7 +158,11 @@ function hapusRuangan()
 
 function lihatSatuan()
 {
-    return "lihat Satuan";
+    global $Open;
+    $sql = "SELECT * FROM satuan";
+    $query = mysqli_query($Open, $sql);
+
+    return $query;
 }
 
 function cariSatuan()
@@ -164,7 +192,11 @@ function hapusSatuan()
 
 function lihatUserProdi()
 {
-    return "lihat UserProdi";
+    global $Open;
+    $sql = "SELECT * FROM user_prodi up, prodi p WHERE up.id_prodi=p.id_prodi";
+    $query = mysqli_query($Open, $sql);
+
+    return $query;
 }
 
 function cariUserProdi()
@@ -194,7 +226,11 @@ function hapusUserProdi()
 
 function lihatPegawai()
 {
-    return "lihat Pegawai";
+    global $Open;
+    $sql = "SELECT * FROM pegawai";
+    $query = mysqli_query($Open, $sql);
+
+    return $query;
 }
 
 function cariPegawai()
