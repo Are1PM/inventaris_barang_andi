@@ -22,6 +22,53 @@
   <script src="assets/vendors/jszip/dist/jszip.min.js"></script>
   <script src="assets/vendors/pdfmake/build/pdfmake.min.js"></script>
   <script src="assets/vendors/pdfmake/build/vfs_fonts.js"></script>
+  <!-- Chart.js -->
+  <script src="assets/vendors/Chart.js/dist/Chart.min.js"></script>
 
   <!-- Custom Theme Scripts -->
   <script src="assets/build/js/custom.min.js"></script>
+
+  <?php
+  // Barang Perlengkapan
+  $brgPer = grafikBarang()[0];
+  $jmlPer = grafikBarang()[1];
+
+  ?>
+  <script>
+    $(document).ready(function() {
+      if ($('#BerPer').length) {
+
+        var ctx = document.getElementById("BerPer");
+        var mybarChart = new Chart(ctx, {
+          type: 'horizontalBar',
+          data: {
+            labels: ["<?= implode('   ","', $brgPer); ?>   "],
+            datasets: [{
+              label: '# Jumlah',
+              backgroundColor: "#26B99A",
+
+              data: [<?= implode(',', $jmlPer); ?>],
+            }]
+          },
+
+          options: {
+            elements: {
+              rectangle: {
+                borderWidth: 2,
+                borderColor: "transparent",
+                borderSkipped: 'left'
+              }
+            },
+            scales: {
+              xAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
+          }
+        });
+
+      }
+    })
+  </script>
