@@ -18,7 +18,7 @@ $no = 1;
         <div class="col-md-12 col-sm-12 ">
             <div class="x_panel">
                 <div class="x_title">
-                    <a href="?page=tambah-barang" class="btn btn-success text-dark">
+                    <a href="?page=tambah-<?= $GLOBALS['currentRoute'] ?>" class="btn btn-success text-dark">
                         <i class="fa fa-plus"></i> Tambah
                     </a>
                     <div class="clearfix"></div>
