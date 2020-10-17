@@ -40,14 +40,13 @@ function login($data)
             $_SESSION['akses'] = $akses;
 
             if ($akses == "perlengkapan") {
-                $_SESSION['id_user_perlengkapan'] = $qry['id_user_perlengkapan'];
+                $_SESSION['id'] = $qry['id_user_perlengkapan'];
                 header("location:user_perlengkapan/home_perlengkapan.php");
             } else if ($akses == "prodi") {
-                $_SESSION['id_user_prodi'] = $qry['id_user_prodi'];
+                $_SESSION['id'] = $qry['id_user_prodi'];
                 header("location:user_prodi/home_prodi.php");
             } else if ($akses == "pegawai") {
-                $_SESSION['id_pegawai'] = $qry['id_pegawai'];
-                $_SESSION['id_prodi'] = $qry['id_prodi'];
+                $_SESSION['id'] = $qry['id_pegawai'];
                 header("location:pegawai/home_pegawai.php");
             }
         } else {
@@ -64,8 +63,11 @@ function login($data)
         header("location:index.php");
     }
 }
-
+$_SESSION['id'] = 1;
 $_SESSION['username'] = "arwan";
+
+// $_SESSION['akses'] = "prodi";
+// $_SESSION['akses'] = "pegawai";
 $_SESSION['akses'] = "perlengkapan";
 // session_destroy();
 
