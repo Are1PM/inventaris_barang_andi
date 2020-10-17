@@ -22,8 +22,14 @@
   <script src="assets/vendors/jszip/dist/jszip.min.js"></script>
   <script src="assets/vendors/pdfmake/build/pdfmake.min.js"></script>
   <script src="assets/vendors/pdfmake/build/vfs_fonts.js"></script>
+  <!-- PNotify -->
+  <script src="assets/vendors/pnotify/dist/pnotify.js"></script>
+  <script src="assets/vendors/pnotify/dist/pnotify.buttons.js"></script>
+
   <!-- Chart.js -->
   <script src="assets/vendors/Chart.js/dist/Chart.min.js"></script>
+  <!-- Parsley -->
+  <script src="assets/vendors/parsleyjs/dist/parsley.min.js"></script>
 
   <!-- Custom Theme Scripts -->
   <script src="assets/build/js/custom.min.js"></script>
@@ -32,6 +38,10 @@
   // Barang Perlengkapan
   $brgPer = grafikBarang()[0];
   $jmlPer = grafikBarang()[1];
+
+  // Barang Perlengkapan
+  $brgPro = grafikBarang()[0];
+  $jmlPro = grafikBarang()[1];
 
   ?>
   <script>
@@ -52,6 +62,9 @@
           },
 
           options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            aspectRatio: 20,
             elements: {
               rectangle: {
                 borderWidth: 2,
@@ -70,5 +83,56 @@
         });
 
       }
+
+      if ($('#BerPro').length) {
+
+        var ctx = document.getElementById("BerPro");
+        var mybarChart = new Chart(ctx, {
+          type: 'horizontalBar',
+          data: {
+            labels: ["<?= implode('   ","', $brgPro); ?>   "],
+            datasets: [{
+              label: '# Jumlah',
+              backgroundColor: "#26B99A",
+
+              data: [<?= implode(',', $jmlPro); ?>],
+            }]
+          },
+          options: {
+            responsive: true,
+            // maintainAspectRatio: true,
+            // aspectRatio: 2,
+            elements: {
+              rectangle: {
+                borderWidth: 2,
+                borderColor: "transparent",
+                borderSkipped: 'left'
+              }
+            },
+            scales: {
+              xAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }],
+              yAxes: [{
+                display: true,
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
+          }
+        });
+
+      }
+      if (typeof notifikasi === "function") {
+        notifikasi()
+      }
+
+      $(".button-hapus").click(function() {
+        var nilai = $(this).data('id')
+        $("#field-hapus").val(nilai)
+      })
     })
   </script>
