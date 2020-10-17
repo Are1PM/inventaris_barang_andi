@@ -19,9 +19,46 @@ function cariBarang()
     return "cari barang";
 }
 
-function tambahBarang()
+function tambahBarang($data)
 {
-    return "tambah barang";
+    global $Open;
+
+    $kode_barang = $data['kode_brg'];
+    $nama_barang = $data['nama_brg'];
+    $no_inventaris = $data['no_inventaris'];
+    $jenis_barang = $data['jenis_brg'];
+    $tanggal_masuk = $data['tgl_masuk'];
+    $jumlah_masuk = $data['jumlah_masuk'];
+    $jumlah_keluar = 0;
+    $tahun_perolehan = $data['tahun_perolehan'];
+    $id_satuan = $data['id_satuan'];
+    $id_kategori = $data['id_kategori'];
+    $gambar = 'sdks';
+
+    $sql = "
+    INSERT INTO barang
+    VALUES (
+        '$kode_barang',
+        '$nama_barang',
+        '$no_inventaris',
+        '$jenis_barang',
+        '$tanggal_masuk',
+        '$jumlah_masuk',
+        '$jumlah_keluar',
+        '$tahun_perolehan',
+        '$id_satuan',
+        '$id_kategori',
+        '$gambar'
+    )
+    ";
+
+    $query = mysqli_query($Open, $sql);
+
+    if (!$query) {
+        return false;
+    }
+
+    return true;
 }
 
 function ubahBarang()
@@ -29,9 +66,25 @@ function ubahBarang()
     return "ubah barang";
 }
 
-function hapusBarang()
+function hapusBarang($data)
 {
-    return "hapus barang";
+    global $Open;
+
+    $id = $data['id'];
+
+    $sql = "
+    DELETE FROM barang
+    WHERE
+        kode_brg = '$id'
+    ";
+
+    $query = mysqli_query($Open, $sql);
+
+    if (!$query) {
+        return false;
+    }
+
+    return true;
 }
 
 function grafikBarang()
@@ -59,8 +112,9 @@ function lihatProdi()
     global $Open;
     $sql = "SELECT * FROM prodi";
     $query = mysqli_query($Open, $sql);
+    $hasil = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
-    return $query;
+    return $hasil;
 }
 
 function cariProdi()
@@ -78,9 +132,25 @@ function ubahProdi()
     return "ubah Prodi";
 }
 
-function hapusProdi()
+function hapusProdi($data)
 {
-    return "hapus Prodi";
+    global $Open;
+
+    $id = $data['id'];
+
+    $sql = "
+    DELETE FROM prodi
+    WHERE
+        id_prodi = '$id'
+    ";
+
+    $query = mysqli_query($Open, $sql);
+
+    if (!$query) {
+        return false;
+    }
+
+    return true;
 }
 
 
@@ -93,8 +163,9 @@ function lihatKategori()
     global $Open;
     $sql = "SELECT * FROM kategori";
     $query = mysqli_query($Open, $sql);
+    $hasil = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
-    return $query;
+    return $hasil;
 }
 
 function cariKategori()
@@ -112,9 +183,25 @@ function ubahKategori()
     return "ubah Kategori";
 }
 
-function hapusKategori()
+function hapusKategori($data)
 {
-    return "hapus Kategori";
+    global $Open;
+
+    $id = $data['id'];
+
+    $sql = "
+    DELETE FROM kategori
+    WHERE
+        id_kategori = '$id'
+    ";
+
+    $query = mysqli_query($Open, $sql);
+
+    if (!$query) {
+        return false;
+    }
+
+    return true;
 }
 
 
@@ -127,8 +214,9 @@ function lihatRuangan()
     global $Open;
     $sql = "SELECT * FROM ruangan";
     $query = mysqli_query($Open, $sql);
+    $hasil = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
-    return $query;
+    return $hasil;
 }
 
 function cariRuangan()
@@ -146,9 +234,25 @@ function ubahRuangan()
     return "ubah Ruangan";
 }
 
-function hapusRuangan()
+function hapusRuangan($data)
 {
-    return "hapus Ruangan";
+    global $Open;
+
+    $id = $data['id'];
+
+    $sql = "
+    DELETE FROM ruangan
+    WHERE
+        id_ruangan = '$id'
+    ";
+
+    $query = mysqli_query($Open, $sql);
+
+    if (!$query) {
+        return false;
+    }
+
+    return true;
 }
 
 
@@ -161,8 +265,9 @@ function lihatSatuan()
     global $Open;
     $sql = "SELECT * FROM satuan";
     $query = mysqli_query($Open, $sql);
+    $hasil = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
-    return $query;
+    return $hasil;
 }
 
 function cariSatuan()
@@ -180,9 +285,25 @@ function ubahSatuan()
     return "ubah Satuan";
 }
 
-function hapusSatuan()
+function hapusSatuan($data)
 {
-    return "hapus Satuan";
+    global $Open;
+
+    $id = $data['id'];
+
+    $sql = "
+    DELETE FROM satuan
+    WHERE
+        id_satuan = '$id'
+    ";
+
+    $query = mysqli_query($Open, $sql);
+
+    if (!$query) {
+        return false;
+    }
+
+    return true;
 }
 
 
@@ -195,8 +316,9 @@ function lihatUserProdi()
     global $Open;
     $sql = "SELECT * FROM user_prodi up, prodi p WHERE up.id_prodi=p.id_prodi";
     $query = mysqli_query($Open, $sql);
+    $hasil = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
-    return $query;
+    return $hasil;
 }
 
 function cariUserProdi()
@@ -214,9 +336,25 @@ function ubahUserProdi()
     return "ubah UserProdi";
 }
 
-function hapusUserProdi()
+function hapusUserProdi($data)
 {
-    return "hapus UserProdi";
+    global $Open;
+
+    $id = $data['id'];
+
+    $sql = "
+    DELETE FROM user_prodi
+    WHERE
+        id_user_prodi = '$id'
+    ";
+
+    $query = mysqli_query($Open, $sql);
+
+    if (!$query) {
+        return false;
+    }
+
+    return true;
 }
 
 
@@ -229,8 +367,9 @@ function lihatPegawai()
     global $Open;
     $sql = "SELECT * FROM pegawai";
     $query = mysqli_query($Open, $sql);
+    $hasil = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
-    return $query;
+    return $hasil;
 }
 
 function cariPegawai()
@@ -248,7 +387,23 @@ function ubahPegawai()
     return "ubah Pegawai";
 }
 
-function hapusPegawai()
+function hapusPegawai($data)
 {
-    return "hapus Pegawai";
+    global $Open;
+
+    $id = $data['id'];
+
+    $sql = "
+    DELETE FROM pegawai
+    WHERE
+        id_pegawai = '$id'
+    ";
+
+    $query = mysqli_query($Open, $sql);
+
+    if (!$query) {
+        return false;
+    }
+
+    return true;
 }
