@@ -27,7 +27,7 @@
     <div class="menu_section">
         <h3>User</h3>
         <ul class="nav side-menu">
-            <li><a href="index.php?page=lihat-user-prodi"><i class="fa fa-laptop"></i> Prodi </a>
+            <li><a href="index.php?page=lihat-user-prodi"><i class="fa fa-laptop"></i> User Prodi </a>
 
             </li>
             <li><a href="index.php?page=lihat-pegawai"><i class="fa fa-sitemap"></i> Pegawai </a>
