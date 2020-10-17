@@ -33,6 +33,7 @@ $no = 1;
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Ruangan</th>
+                                            <th>Penanggung Jawab</th>
                                             <th width="27%">Aksi</th>
                                         </tr>
                                     </thead>
@@ -43,6 +44,7 @@ $no = 1;
                                             <tr>
                                                 <td><?= $no++ ?></td>
                                                 <td><?= $d['nama_ruangan'] ?></td>
+                                                <td><?= $d['pj'] ?></td>
                                                 <td>
                                                     <a class="btn btn-warning btn-sm mr-1">
                                                         <i class="fa fa-eye"></i> Detail
