@@ -7,20 +7,10 @@
                 <a href="index.php?page=beranda"><i class="fa fa-home"></i> Beranda</a>
             </li>
             <li>
-                <a href="index.php?page=lihat-barang"><i class="fa fa-edit"></i> Master Barang</a>
+                <a href="index.php?page=lihat-barang"><i class="fa fa-archive"></i> Master Barang Prodi</a>
             </li>
             <li>
-                <a href="index.php?page=lihat-prodi"><i class="fa fa-bar-chart-o"></i> Master Prodi </a>
-            </li>
-            <li>
-                <a href="index.php?page=lihat-kategori"><i class="fa fa-desktop"></i> Master Kategori </a>
-            </li>
-            <li>
-                <a href="index.php?page=lihat-ruangan"><i class="fa fa-table"></i> Master Ruangan </a>
-            </li>
-
-            <li>
-                <a href="index.php?page=lihat-satuan"><i class="fa fa-clone"></i>Master Satuan </a>
+                <a href="index.php?page=ubah-password"><i class="fa fa-key"></i> Ubah Password</a>
             </li>
         </ul>
     </div>
