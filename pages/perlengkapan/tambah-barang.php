@@ -1,5 +1,6 @@
 <?php
-$judul = "Tambah Barang";
+$idRoute = $GLOBALS['currentRoute'];
+$judul = "Tambah " . ucfirst($idRoute);
 
 // Data
 $dt_satuan = lihatSatuan();
@@ -19,12 +20,12 @@ $no = 1;
         <div class="col-md-12 col-sm-12 ">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Form Tambah Barang</h2>
+                    <h2>Form <?= $judul ?></h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                     <br />
-                    <form id="demo-form2" action="index.php?page=kirim-barang" method="post" data-parsley-validate class="form-horizontal form-label-left">
+                    <form id="demo-form2" action="index.php?page=kirim-<?= $idRoute ?>" method="post" data-parsley-validate class="form-horizontal form-label-left">
 
                         <!-- Kode Barang Input -->
                         <div class="item form-group">
@@ -122,7 +123,7 @@ $no = 1;
                         <div class="ln_solid"></div>
                         <div class="item form-group">
                             <div class="col-md-6 col-sm-6 offset-md-3">
-                                <a href="?page=lihat-barang" class="btn btn-warning" type="button">Cancel</a>
+                                <a href="?page=lihat-<?= $idRoute ?>" class="btn btn-warning" type="button">Cancel</a>
                                 <button class="btn btn-primary" type="reset">Reset</button>
                                 <button type="submit" class="btn btn-success" name="kirim">Submit</button>
                             </div>
