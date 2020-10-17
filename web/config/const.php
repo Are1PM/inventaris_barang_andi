@@ -9,5 +9,6 @@
 $constanta = [
     'ROOT' => '/',
     'LAYOUT' => '/layout',
-    'PAGES' => '/pages/'
+    'PAGES' => '/pages/',
+    'GAMBAR' => '/images/'
 ];
