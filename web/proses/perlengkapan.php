@@ -122,9 +122,28 @@ function cariProdi()
     return "cari Prodi";
 }
 
-function tambahProdi()
+function tambahProdi($data)
 {
-    return "tambah Prodi";
+    global $Open;
+
+    $nama_prodi = $data['nama_prodi'];
+
+    $sql = "
+    INSERT INTO prodi
+    VALUES (
+        null,
+        '$nama_prodi'
+       
+    )
+    ";
+
+    $query = mysqli_query($Open, $sql);
+
+    if (!$query) {
+        return false;
+    }
+
+    return true;
 }
 
 function ubahProdi()
@@ -173,9 +192,28 @@ function cariKategori()
     return "cari Kategori";
 }
 
-function tambahKategori()
+function tambahKategori($data)
 {
-    return "tambah Kategori";
+    global $Open;
+
+    $nama_kategori = $data['nama_kategori'];
+
+    $sql = "
+    INSERT INTO kategori
+    VALUES (
+        null,
+        '$nama_kategori'
+       
+    )
+    ";
+
+    $query = mysqli_query($Open, $sql);
+
+    if (!$query) {
+        return false;
+    }
+
+    return true;
 }
 
 function ubahKategori()
@@ -224,9 +262,29 @@ function cariRuangan()
     return "cari Ruangan";
 }
 
-function tambahRuangan()
+function tambahRuangan($data)
 {
-    return "tambah Ruangan";
+    global $Open;
+
+    $nama_ruangan = $data['nama_ruangan'];
+    $pj = $data['pj'];
+
+    $sql = "
+    INSERT INTO ruangan
+    VALUES (
+        null,
+        '$nama_ruangan',
+        '$pj'
+    )
+    ";
+
+    $query = mysqli_query($Open, $sql);
+
+    if (!$query) {
+        return false;
+    }
+
+    return true;
 }
 
 function ubahRuangan()
@@ -275,9 +333,28 @@ function cariSatuan()
     return "cari Satuan";
 }
 
-function tambahSatuan()
+function tambahSatuan($data)
 {
-    return "tambah Satuan";
+    global $Open;
+
+    $nama_satuan = $data['nama_satuan'];
+
+    $sql = "
+    INSERT INTO satuan
+    VALUES (
+        null,
+        '$nama_satuan'
+       
+    )
+    ";
+
+    $query = mysqli_query($Open, $sql);
+
+    if (!$query) {
+        return false;
+    }
+
+    return true;
 }
 
 function ubahSatuan()
@@ -326,9 +403,32 @@ function cariUserProdi()
     return "cari UserProdi";
 }
 
-function tambahUserProdi()
+function tambahUserProdi($data)
 {
-    return "tambah UserProdi";
+    global $Open;
+
+    $username = $data['username'];
+    $password = $data['password'];
+    $id_prodi = $data['id_prodi'];
+
+
+    $sql = "
+    INSERT INTO user_prodi
+    VALUES (
+        null,
+        '$username',
+        '$password',
+        '$id_prodi'
+    )
+    ";
+
+    $query = mysqli_query($Open, $sql);
+
+    if (!$query) {
+        return false;
+    }
+
+    return true;
 }
 
 function ubahUserProdi()
@@ -377,9 +477,32 @@ function cariPegawai()
     return "cari Pegawai";
 }
 
-function tambahPegawai()
+function tambahPegawai($data)
 {
-    return "tambah Pegawai";
+    global $Open;
+
+    $nip_nidn = $data['nip_nidn'];
+    $nama_pegawai = $data['nama_pegawai'];
+    $jabatan = $data['jabatan'];
+
+
+    $sql = "
+    INSERT INTO pegawai
+    VALUES (
+        null,
+        '$nip_nidn',
+        '$nama_pegawai',
+        '$jabatan'
+    )
+    ";
+
+    $query = mysqli_query($Open, $sql);
+
+    if (!$query) {
+        return false;
+    }
+
+    return true;
 }
 
 function ubahPegawai()
