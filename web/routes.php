@@ -5,8 +5,12 @@ function routes($get)
     // die;
     $req = explode("/", $_SERVER['REQUEST_URI']);
     $rt = explode("-", end($req));
-    $GLOBALS['currentRoute'] = end($rt);
-
+    if (count($rt) > 2) {
+        $out = array_splice($rt, 1);
+        $GLOBALS['currentRoute'] = implode("-", $out);
+    } else {
+        $GLOBALS['currentRoute'] = end($rt);
+    }
 
     $file_request = end($req);
 
