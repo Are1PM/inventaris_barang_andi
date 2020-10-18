@@ -5,6 +5,7 @@ function routes($get)
     // die;
     $req = explode("/", $_SERVER['REQUEST_URI']);
     $rt = explode("-", end($req));
+
     if (count($rt) > 2) {
         $out = array_splice($rt, 1);
         $GLOBALS['currentRoute'] = implode("-", $out);
@@ -13,6 +14,8 @@ function routes($get)
     }
 
     $file_request = end($req);
+
+
 
     // Default path page  ======> lokasi : page/
     $path = PAGES;
@@ -69,7 +72,6 @@ function routes($get)
             return $NotFound;
             break;
     }
-
 
     return $path;
 }
