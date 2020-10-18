@@ -14,12 +14,19 @@ function lihatBarang()
     return $hasil;
 }
 
-function cariBarang()
+function cariBarang($kode_barang)
 {
-    return "cari barang";
+    global $Open;
+    $kode_barang = htmlspecialchars($kode_barang);
+
+    $sql = "SELECT * FROM barang b, satuan s, kategori k WHERE kode_brg='$kode_barang' AND b.id_satuan=s.id_satuan AND b.id_kategori=k.id_kategori";
+    $query = mysqli_query($Open, $sql);
+    $hasil = mysqli_fetch_assoc($query);
+
+    return $hasil;
 }
 
-function tambahBarang($data)
+function tambahBarang($data, $file)
 {
     global $Open;
 
@@ -33,7 +40,10 @@ function tambahBarang($data)
     $tahun_perolehan = $data['tahun_perolehan'];
     $id_satuan = $data['id_satuan'];
     $id_kategori = $data['id_kategori'];
-    $gambar = 'sdks';
+
+    $type = explode('/', $file['gambar']['type']);
+    $ukuran = $file['gambar']['size'];
+    $gambar =  "images/uploads/" . $kode_barang . "_" . time() . "." . end($type);
 
     $sql = "
     INSERT INTO barang
@@ -51,13 +61,23 @@ function tambahBarang($data)
         '$gambar'
     )
     ";
+    mysqli_begin_transaction($Open, MYSQLI_TRANS_START_READ_WRITE);
 
-    $query = mysqli_query($Open, $sql);
+    mysqli_query($Open, $sql);
 
-    if (!$query) {
-        return false;
+    // Cek Photo
+    if ($ukuran > 0) {
+        //upload Photo
+        if (is_uploaded_file($file['gambar']['tmp_name'])) {
+
+            if (move_uploaded_file($file['gambar']['tmp_name'], $gambar)) {
+                mysqli_commit($Open);
+            } else {
+                mysqli_rollback($Open);
+                return false;
+            }
+        }
     }
-
     return true;
 }
 
@@ -117,9 +137,16 @@ function lihatProdi()
     return $hasil;
 }
 
-function cariProdi()
+function cariProdi($id_prodi)
 {
-    return "cari Prodi";
+    global $Open;
+    $id_prodi = htmlspecialchars($id_prodi);
+
+    $sql = "SELECT * FROM prodi WHERE id_prodi='$id_prodi'";
+    $query = mysqli_query($Open, $sql);
+    $hasil = mysqli_fetch_assoc($query);
+
+    return $hasil;
 }
 
 function tambahProdi($data)
@@ -187,9 +214,16 @@ function lihatKategori()
     return $hasil;
 }
 
-function cariKategori()
+function cariKategori($id_kategori)
 {
-    return "cari Kategori";
+    global $Open;
+    $id_kategori = htmlspecialchars($id_kategori);
+
+    $sql = "SELECT * FROM kategori WHERE id_kategori='$id_kategori'";
+    $query = mysqli_query($Open, $sql);
+    $hasil = mysqli_fetch_assoc($query);
+
+    return $hasil;
 }
 
 function tambahKategori($data)
@@ -257,9 +291,16 @@ function lihatRuangan()
     return $hasil;
 }
 
-function cariRuangan()
+function cariRuangan($id_ruangan)
 {
-    return "cari Ruangan";
+    global $Open;
+    $id_ruangan = htmlspecialchars($id_ruangan);
+
+    $sql = "SELECT * FROM ruangan WHERE id_ruangan='$id_ruangan'";
+    $query = mysqli_query($Open, $sql);
+    $hasil = mysqli_fetch_assoc($query);
+
+    return $hasil;
 }
 
 function tambahRuangan($data)
@@ -328,9 +369,16 @@ function lihatSatuan()
     return $hasil;
 }
 
-function cariSatuan()
+function cariSatuan($id_satuan)
 {
-    return "cari Satuan";
+    global $Open;
+    $id_satuan = htmlspecialchars($id_satuan);
+
+    $sql = "SELECT * FROM satuan WHERE id_satuan='$id_satuan'";
+    $query = mysqli_query($Open, $sql);
+    $hasil = mysqli_fetch_assoc($query);
+
+    return $hasil;
 }
 
 function tambahSatuan($data)
@@ -398,9 +446,16 @@ function lihatUserProdi()
     return $hasil;
 }
 
-function cariUserProdi()
+function cariUserProdi($id_user_prodi)
 {
-    return "cari UserProdi";
+    global $Open;
+    $id_user_prodi = htmlspecialchars($id_user_prodi);
+
+    $sql = "SELECT * FROM user_prodi up, prodi p WHERE id_user_prodi='$id_user_prodi' AND up.id_prodi=p.id_prodi";
+    $query = mysqli_query($Open, $sql);
+    $hasil = mysqli_fetch_assoc($query);
+
+    return $hasil;
 }
 
 function tambahUserProdi($data)
@@ -472,9 +527,16 @@ function lihatPegawai()
     return $hasil;
 }
 
-function cariPegawai()
+function cariPegawai($id_pegawai)
 {
-    return "cari Pegawai";
+    global $Open;
+    $id_pegawai = htmlspecialchars($id_pegawai);
+
+    $sql = "SELECT * FROM pegawai WHERE id_pegawai='$id_pegawai'";
+    $query = mysqli_query($Open, $sql);
+    $hasil = mysqli_fetch_assoc($query);
+
+    return $hasil;
 }
 
 function tambahPegawai($data)
