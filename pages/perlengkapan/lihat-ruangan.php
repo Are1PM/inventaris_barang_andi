@@ -1,4 +1,5 @@
 <?php
+$idRoute = $GLOBALS['currentRoute'];
 $judul = "Data Ruangan";
 
 $data = lihatRuangan();
@@ -17,7 +18,7 @@ $no = 1;
         <div class="col-md-12 col-sm-12 ">
             <div class="x_panel">
                 <div class="x_title">
-                    <a href="?page=tambah-<?= $GLOBALS['currentRoute'] ?>" class="btn btn-success text-dark">
+                    <a href="?page=tambah-<?= $idRoute ?>" class="btn btn-success text-dark">
                         <i class="fa fa-plus"></i> Tambah
                     </a>
 
@@ -46,8 +47,10 @@ $no = 1;
                                                 <td><?= $d['nama_ruangan'] ?></td>
                                                 <td><?= $d['pj'] ?></td>
                                                 <td>
-                                                    <a class="btn btn-warning btn-sm mr-1">
-                                                        <i class="fa fa-eye"></i> Detail
+                                                    <a href="?page=detail-<?= $idRoute . "&id=" . $d['id_ruangan'] ?>">
+                                                        <button type="button" class="btn btn-warning btn-sm mr-1 ">
+                                                            <i class="fa fa-eye"></i> Detail
+                                                        </button>
                                                     </a>
                                                     <a class="btn btn-primary btn-sm mr-1">
                                                         <i class="fa fa-edit"></i> Ubah

@@ -25,7 +25,7 @@ $no = 1;
                 </div>
                 <div class="x_content">
                     <br />
-                    <form id="demo-form2" action="index.php?page=kirim-<?= $idRoute ?>" method="post" data-parsley-validate class="form-horizontal form-label-left">
+                    <form id="demo-form2" action="index.php?page=kirim-<?= $idRoute ?>" method="post" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
 
                         <!-- Kode Barang Input -->
                         <div class="item form-group">
@@ -97,9 +97,9 @@ $no = 1;
                             </div>
                         </div>
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align " for="id_satuan">Satuan</label>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align " for="id_satuan">Satuan <span class="required">*</span></label>
                             <div class="col-md-6 col-sm-6 ">
-                                <select id="id_satuan" name="id_satuan" class="form-control">
+                                <select id="id_satuan" name="id_satuan" class="form-control" required="required">
                                     <option value=""> - Pilih Satuan - </option>
                                     <?php foreach ($dt_satuan as $dt) : ?>
                                         <option value=<?= $dt['id_satuan'] ?>><?= $dt['nama_satuan'] ?></option>
@@ -108,15 +108,25 @@ $no = 1;
                             </div>
                         </div>
 
+                        <!-- Kategori Input -->
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align " for="id_kategori">Kategori</label>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align " for="id_kategori">Kategori <span class="required">*</span></label>
                             <div class="col-md-6 col-sm-6 ">
-                                <select id="id_kategori" name="id_kategori" class="form-control">
+                                <select id="id_kategori" name="id_kategori" class="form-control" required="required">
                                     <option value=""> - Pilih Kategori - </option>
                                     <?php foreach ($dt_kategori as $dt) : ?>
                                         <option value=<?= $dt['id_kategori'] ?>><?= $dt['nama_kategori'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
+                            </div>
+                        </div>
+
+
+                        <!-- Foto Upload -->
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align " for="gambar">Gambar <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="file" name="gambar" id="gambar" required="required" accept=".jpg,.jpeg">
                             </div>
                         </div>
 
