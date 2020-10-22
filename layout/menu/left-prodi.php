@@ -9,11 +9,14 @@
             <li>
                 <a href="index.php?page=lihat-barang"><i class="fa fa-archive"></i> Master Barang Prodi</a>
             </li>
+        </ul>
+    </div>
+    <div class="menu_section">
+        <h3>User</h3>
+        <ul class="nav side-menu">
             <li>
                 <a href="index.php?page=ubah-password"><i class="fa fa-key"></i> Ubah Password</a>
             </li>
         </ul>
     </div>
-
-
 </div>
