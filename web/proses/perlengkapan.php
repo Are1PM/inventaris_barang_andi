@@ -78,12 +78,71 @@ function tambahBarang($data, $file)
             }
         }
     }
+
     return true;
 }
 
-function ubahBarang()
+function ubahBarang($data, $file)
 {
-    return "ubah barang";
+    global $Open;
+
+    $kode_barang = $data['kode_brg'];
+    $nama_barang = $data['nama_brg'];
+    $no_inventaris = $data['no_inventaris'];
+    $jenis_barang = $data['jenis_brg'];
+    $tanggal_masuk = $data['tgl_masuk'];
+    $jumlah_masuk = $data['jumlah_masuk'];
+    $jumlah_keluar = 0;
+    $tahun_perolehan = $data['tahun_perolehan'];
+    $id_satuan = $data['id_satuan'];
+    $id_kategori = $data['id_kategori'];
+
+    $type = explode('/', $file['gambar']['type']);
+    $ukuran = $file['gambar']['size'];
+    $gambar =  "images/uploads/" . $kode_barang . "_" . time() . "." . end($type);
+
+    $dt_lama = cariBarang($kode_barang);
+    if ($file['gambar']['size'] > 0) {
+        unlink($dt_lama['image']);
+    } else {
+        $gambar = $dt_lama['image'];
+    }
+
+    $sql = "
+    UPDATE barang SET
+    nama_brg='$nama_barang',
+    no_inventaris='$no_inventaris',
+    jenis_brg='$jenis_barang',
+    tgl_masuk='$tanggal_masuk',
+    jumlah_masuk='$jumlah_masuk',
+    jumlah_keluar='$jumlah_keluar',
+    tahun_perolehan='$tahun_perolehan',
+    id_satuan='$id_satuan',
+    id_kategori='$id_kategori',
+    image='$gambar'
+    WHERE
+    kode_brg='$kode_barang'
+    ";
+    mysqli_begin_transaction($Open, MYSQLI_TRANS_START_READ_WRITE);
+
+    mysqli_query($Open, $sql);
+
+    // Cek Photo
+    if ($ukuran > 0) {
+        //upload Photo
+        if (is_uploaded_file($file['gambar']['tmp_name'])) {
+
+            if (move_uploaded_file($file['gambar']['tmp_name'], $gambar)) {
+                mysqli_commit($Open);
+            } else {
+                mysqli_rollback($Open);
+                return false;
+            }
+        }
+    }
+
+    mysqli_commit($Open);
+    return true;
 }
 
 function hapusBarang($data)
@@ -173,9 +232,29 @@ function tambahProdi($data)
     return true;
 }
 
-function ubahProdi()
+function ubahProdi($data)
 {
-    return "ubah Prodi";
+    global $Open;
+
+    $id_prodi = $data['id_prodi'];
+    $nama_prodi = $data['nama_prodi'];
+
+    $sql = "
+    UPDATE
+        prodi
+    SET
+        nama_prodi='$nama_prodi'
+    WHERE
+        id_prodi='$id_prodi'
+    ";
+
+    $query = mysqli_query($Open, $sql);
+
+    if (!$query) {
+        return false;
+    }
+
+    return true;
 }
 
 function hapusProdi($data)
@@ -250,9 +329,30 @@ function tambahKategori($data)
     return true;
 }
 
-function ubahKategori()
+function ubahKategori($data)
 {
-    return "ubah Kategori";
+    global $Open;
+
+    $id_kategori = $data['id_kategori'];
+    $nama_kategori = $data['nama_kategori'];
+
+    $sql = "
+    UPDATE
+        kategori
+    SET
+        nama_kategori='$nama_kategori'
+       
+    WHERE
+        id_kategori='$id_kategori'
+    ";
+
+    $query = mysqli_query($Open, $sql);
+
+    if (!$query) {
+        return false;
+    }
+
+    return true;
 }
 
 function hapusKategori($data)
@@ -328,9 +428,31 @@ function tambahRuangan($data)
     return true;
 }
 
-function ubahRuangan()
+function ubahRuangan($data)
 {
-    return "ubah Ruangan";
+    global $Open;
+
+    $id_ruangan = $data['id_ruangan'];
+    $nama_ruangan = $data['nama_ruangan'];
+    $pj = $data['pj'];
+
+    $sql = "
+    UPDATE 
+        ruangan
+    SET
+        nama_ruangan='$nama_ruangan',
+        pj='$pj'
+    WHERE
+        id_ruangan='$id_ruangan'
+    ";
+
+    $query = mysqli_query($Open, $sql);
+
+    if (!$query) {
+        return false;
+    }
+
+    return true;
 }
 
 function hapusRuangan($data)
@@ -405,9 +527,29 @@ function tambahSatuan($data)
     return true;
 }
 
-function ubahSatuan()
+function ubahSatuan($data)
 {
-    return "ubah Satuan";
+    global $Open;
+
+    $id_satuan = $data['id_satuan'];
+    $nama_satuan = $data['nama_satuan'];
+
+    $sql = "
+    UPDATE
+        satuan
+    SET
+        nama_satuan='$nama_satuan'
+    WHERE
+        id_satuan='$id_satuan'
+    ";
+
+    $query = mysqli_query($Open, $sql);
+
+    if (!$query) {
+        return false;
+    }
+
+    return true;
 }
 
 function hapusSatuan($data)
@@ -486,9 +628,34 @@ function tambahUserProdi($data)
     return true;
 }
 
-function ubahUserProdi()
+function ubahUserProdi($data)
 {
-    return "ubah UserProdi";
+    global $Open;
+
+    $id_user_prodi = $data['id_user_prodi'];
+    $username = $data['username'];
+    $password = $data['password'];
+    $id_prodi = $data['id_prodi'];
+
+
+    $sql = "
+    UPDATE 
+        user_prodi
+    SET
+        username='$username',
+        password='$password',
+        id_prodi='$id_prodi'
+    WHERE
+        id_user_prodi='$id_user_prodi'
+    ";
+
+    $query = mysqli_query($Open, $sql);
+
+    if (!$query) {
+        return false;
+    }
+
+    return true;
 }
 
 function hapusUserProdi($data)
@@ -567,9 +734,33 @@ function tambahPegawai($data)
     return true;
 }
 
-function ubahPegawai()
+function ubahPegawai($data)
 {
-    return "ubah Pegawai";
+    global $Open;
+
+    $id_pegawai = $data['id_pegawai'];
+    $nip_nidn = $data['nip_nidn'];
+    $nama_pegawai = $data['nama_pegawai'];
+    $jabatan = $data['jabatan'];
+
+    $sql = "
+    UPDATE
+        pegawai
+    SET
+        nip_nid='$nip_nidn',
+        nama_pegawai='$nama_pegawai',
+        jabatan='$jabatan'
+    WHERE
+        id_pegawai='$id_pegawai'
+    ";
+
+    $query = mysqli_query($Open, $sql);
+
+    if (!$query) {
+        return false;
+    }
+
+    return true;
 }
 
 function hapusPegawai($data)
@@ -582,6 +773,47 @@ function hapusPegawai($data)
     DELETE FROM pegawai
     WHERE
         id_pegawai = '$id'
+    ";
+
+    $query = mysqli_query($Open, $sql);
+
+    if (!$query) {
+        return false;
+    }
+
+    return true;
+}
+
+
+// ========================================================
+// ======= GANTI PASSWORD =================================
+// ========================================================
+
+function cariUserLogin($id_user_perlengkapan)
+{
+    global $Open;
+    $id_user_perlengkapan = htmlspecialchars($id_user_perlengkapan);
+
+    $sql = "SELECT * FROM user_perlengkapan WHERE id_user_perlengkapan='$id_user_perlengkapan'";
+    $query = mysqli_query($Open, $sql);
+    $hasil = mysqli_fetch_assoc($query);
+
+    return $hasil;
+}
+function ubahPassword($data)
+{
+    global $Open;
+
+    $id_user_perlengkapan = $_SESSION['id'];
+    $password_baru = $data['password_baru'];
+
+    $sql = "
+    UPDATE
+        user_perlengkapan
+    SET
+        password='$password_baru'
+    WHERE
+        id_user_perlengkapan='$id_user_perlengkapan'
     ";
 
     $query = mysqli_query($Open, $sql);
