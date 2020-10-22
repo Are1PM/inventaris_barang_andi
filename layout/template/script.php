@@ -35,104 +35,107 @@
   <script src="assets/build/js/custom.min.js"></script>
 
   <?php
-  // Barang Perlengkapan
-  $brgPer = grafikBarang()[0];
-  $jmlPer = grafikBarang()[1];
+  if (isset($_SESSION['akses'])) :
+    // Barang Perlengkapan
+    $brgPer = grafikBarang()[0];
+    $jmlPer = grafikBarang()[1];
 
-  // Barang Perlengkapan
-  $brgPro = grafikBarang()[0];
-  $jmlPro = grafikBarang()[1];
+    // Barang Perlengkapan
+    $brgPro = grafikBarang()[0];
+    $jmlPro = grafikBarang()[1];
 
   ?>
-  <script>
-    $(document).ready(function() {
-      if ($('#BerPer').length) {
+    <script>
+      $(document).ready(function() {
+        if ($('#BerPer').length) {
 
-        var ctx = document.getElementById("BerPer");
-        var mybarChart = new Chart(ctx, {
-          type: 'horizontalBar',
-          data: {
-            labels: ["<?= implode('   ","', $brgPer); ?>   "],
-            datasets: [{
-              label: '# Jumlah',
-              backgroundColor: "#26B99A",
+          var ctx = document.getElementById("BerPer");
+          var mybarChart = new Chart(ctx, {
+            type: 'horizontalBar',
+            data: {
+              labels: ["<?= implode('   ","', $brgPer); ?>   "],
+              datasets: [{
+                label: '# Jumlah',
+                backgroundColor: "#26B99A",
 
-              data: [<?= implode(',', $jmlPer); ?>],
-            }]
-          },
-
-          options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            aspectRatio: 20,
-            elements: {
-              rectangle: {
-                borderWidth: 2,
-                borderColor: "transparent",
-                borderSkipped: 'left'
-              }
-            },
-            scales: {
-              xAxes: [{
-                ticks: {
-                  beginAtZero: true
-                }
+                data: [<?= implode(',', $jmlPer); ?>],
               }]
-            }
-          }
-        });
-
-      }
-
-      if ($('#BerPro').length) {
-
-        var ctx = document.getElementById("BerPro");
-        var mybarChart = new Chart(ctx, {
-          type: 'horizontalBar',
-          data: {
-            labels: ["<?= implode('   ","', $brgPro); ?>   "],
-            datasets: [{
-              label: '# Jumlah',
-              backgroundColor: "#26B99A",
-
-              data: [<?= implode(',', $jmlPro); ?>],
-            }]
-          },
-          options: {
-            responsive: true,
-            // maintainAspectRatio: true,
-            // aspectRatio: 2,
-            elements: {
-              rectangle: {
-                borderWidth: 2,
-                borderColor: "transparent",
-                borderSkipped: 'left'
-              }
             },
-            scales: {
-              xAxes: [{
-                ticks: {
-                  beginAtZero: true
+
+            options: {
+              responsive: true,
+              maintainAspectRatio: true,
+              aspectRatio: 20,
+              elements: {
+                rectangle: {
+                  borderWidth: 2,
+                  borderColor: "transparent",
+                  borderSkipped: 'left'
                 }
-              }],
-              yAxes: [{
-                display: true,
-                ticks: {
-                  beginAtZero: true
-                }
-              }]
+              },
+              scales: {
+                xAxes: [{
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }]
+              }
             }
-          }
-        });
+          });
 
-      }
-      if (typeof notifikasi === "function") {
-        notifikasi()
-      }
+        }
 
-      $(".button-hapus").click(function() {
-        var nilai = $(this).data('id')
-        $("#field-hapus").val(nilai)
+        if ($('#BerPro').length) {
+
+          var ctx = document.getElementById("BerPro");
+          var mybarChart = new Chart(ctx, {
+            type: 'horizontalBar',
+            data: {
+              labels: ["<?= implode('   ","', $brgPro); ?>   "],
+              datasets: [{
+                label: '# Jumlah',
+                backgroundColor: "#26B99A",
+
+                data: [<?= implode(',', $jmlPro); ?>],
+              }]
+            },
+            options: {
+              responsive: true,
+              // maintainAspectRatio: true,
+              // aspectRatio: 2,
+              elements: {
+                rectangle: {
+                  borderWidth: 2,
+                  borderColor: "transparent",
+                  borderSkipped: 'left'
+                }
+              },
+              scales: {
+                xAxes: [{
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }],
+                yAxes: [{
+                  display: true,
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }]
+              }
+            }
+          });
+
+        }
+        if (typeof notifikasi === "function") {
+          notifikasi()
+        }
+
+        $(".button-hapus").click(function() {
+          var nilai = $(this).data('id')
+          $("#field-hapus").val(nilai)
+        })
+
       })
-    })
-  </script>
+    </script>
+  <?php endif; ?>
