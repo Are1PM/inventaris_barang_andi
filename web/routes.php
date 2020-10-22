@@ -6,6 +6,7 @@ function routes($get)
     $req = explode("/", $_SERVER['REQUEST_URI']);
     $rt = explode("-", end($req));
 
+
     if (count($rt) > 2) {
         $out = array_splice($rt, 1);
         $GLOBALS['currentRoute'] = implode("-", $out);
@@ -30,9 +31,8 @@ function routes($get)
     // =============================================================
     //  === Set User Path ==========================================
     // =============================================================
-
     if (isset($_SESSION['username']) && isset($_SESSION['akses'])) {
-        $file = $_SESSION['akses'] . "/" . $route;
+        $file = $path . $_SESSION['akses'] . "/" . $route;
 
         // Agar tidak not found saat file index.php tanpa parameter
         if ($route === "") {
@@ -47,18 +47,19 @@ function routes($get)
             $file .= ".php";
         }
 
-        $path .= $file;
 
-        if (file_exists($path)) {
-            return $path;
+        if (file_exists($file)) {
+
+            return $file;
         } else {
-            $aksi = "";
+            $aksi = ($route == 'login') ? "" : $route;
         }
     }
 
     // =============================================================
     //  === Jika Tidak Login =======================================
     // =============================================================
+
     switch ($aksi) {
         case 'export-stok-pdf':
             echo "<script language=\"JavaScript\">
@@ -67,6 +68,15 @@ function routes($get)
             break;
         case 'login':
             $path .= 'login.php';
+            break;
+        case 'ubah-password':
+            $path .= $aksi . '.php';
+            break;
+        case 'kirim-password':
+            $path .= $aksi . '.php';
+            break;
+        case 'logout':
+            $path .= 'logout.php';
             break;
         default:
             return $NotFound;
