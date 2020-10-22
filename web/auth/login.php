@@ -1,15 +1,11 @@
 <?php
+if (isset($_POST['login-proses'])) {
+    $data = $_POST;
 
-function login($data)
-{
-    global $Open;
-    if (is_array($data)) {
-        return "Kirimkan data array";
-    }
-    $user = $data['user'];
-    $password = $_POST['password'];
-    $akses = $_POST['akses'];
-    $op = $_GET['op'];
+    $user = $data['username'];
+    $password = $data['password'];
+    $akses = $data['akses'];
+    $op = $data['op'];
 
     if ($op == "in") {
         if ($akses == "perlengkapan") {
@@ -17,7 +13,7 @@ function login($data)
         } else if ($akses == "prodi") {
             $sql = mysqli_query($Open, "SELECT * FROM user_prodi WHERE username='$user' AND password='$password'");
         } else if ($akses == "pegawai") {
-            $sql = mysqli_query($Open, "SELECT * FROM pegawai  WHERE nip_nid='$user' AND nip_nid='$password'");
+            $sql = mysqli_query($Open, "SELECT * FROM pegawai  WHERE nip_nid='$user' AND password='$password'");
         } else {
 ?>
             <script language="JavaScript">
@@ -41,13 +37,13 @@ function login($data)
 
             if ($akses == "perlengkapan") {
                 $_SESSION['id'] = $qry['id_user_perlengkapan'];
-                header("location:user_perlengkapan/home_perlengkapan.php");
+                // header("location:user_perlengkapan/home_perlengkapan.php");
             } else if ($akses == "prodi") {
                 $_SESSION['id'] = $qry['id_user_prodi'];
-                header("location:user_prodi/home_prodi.php");
+                // header("location:user_prodi/home_prodi.php");
             } else if ($akses == "pegawai") {
                 $_SESSION['id'] = $qry['id_pegawai'];
-                header("location:pegawai/home_pegawai.php");
+                // header("location:pegawai/home_pegawai.php");
             }
         } else {
         ?>
@@ -63,12 +59,12 @@ function login($data)
         header("location:index.php");
     }
 }
-$_SESSION['id'] = 1;
-$_SESSION['username'] = "arwan";
+// $_SESSION['id'] = 1;
+// $_SESSION['username'] = "arwan";
 
-// $_SESSION['akses'] = "prodi";
-// $_SESSION['akses'] = "pegawai";
-$_SESSION['akses'] = "perlengkapan";
+// // $_SESSION['akses'] = "prodi";
+// // $_SESSION['akses'] = "pegawai";
+// $_SESSION['akses'] = "perlengkapan";
 // session_destroy();
 
 ?>
