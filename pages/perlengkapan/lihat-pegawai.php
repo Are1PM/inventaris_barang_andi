@@ -54,8 +54,10 @@ $no = 1;
                                                             <i class="fa fa-eye"></i> Detail
                                                         </button>
                                                     </a>
-                                                    <a class="btn btn-primary btn-sm mr-1">
-                                                        <i class="fa fa-edit"></i> Ubah
+                                                    <a href="?page=ubah-<?= $idRoute . "&id=" . $d['id_pegawai'] ?>">
+                                                        <button type="button" class="btn btn-primary btn-sm mr-1">
+                                                            <i class="fa fa-edit"></i> Ubah
+                                                        </button>
                                                     </a>
                                                     <button type="button" class="btn btn-danger btn-sm button-hapus" data-toggle="modal" data-target=".modal-hapus" data-id="<?= $d['id_pegawai'] ?>">
                                                         <i class="fa fa-trash"></i> Hapus
