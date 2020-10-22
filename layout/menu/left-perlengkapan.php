@@ -35,6 +35,14 @@
             </li>
         </ul>
     </div>
+    <div class="menu_section">
+        <h3>Privasi</h3>
+        <ul class="nav side-menu">
+            <li>
+                <a href="index.php?page=ubah-password"><i class="fa fa-key"></i> Ubah Password</a>
+            </li>
+        </ul>
+    </div>
 
 
 </div>
